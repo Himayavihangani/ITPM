@@ -23,7 +23,7 @@ function VisaForm() {
       />
       <Form.Text id="passwordHelpBlock" >
         Your card Number must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
+        and must not contain spaces, special character, or emoji.
       </Form.Text>
       <br></br>
       <br></br>
