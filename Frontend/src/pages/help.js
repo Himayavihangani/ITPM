@@ -17,6 +17,7 @@ export default function Help() {
             <center>
                 <h1 style={{ fontFamily: 'lato', fontSize: '32px', fontWeight: 700, paddingTop: "20px" }}>Help center</h1>
                 <h2 style={{ fontFamily: 'lato', fontSize: '24px', fontWeight: 700 }}>How can I help you?</h2>
+                {/* help */}
                 <Accordion style={{ width: "1000px" }}>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>How do I place an order?</Accordion.Header>
