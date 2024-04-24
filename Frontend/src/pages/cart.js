@@ -50,7 +50,7 @@ export default function Cart() {
                 </svg>
             </Button>
         </div>
-{/* cards carts */}
+{/* cart */}
             <center>
                 {cardData.map((card) => (
                     <Card key={card.id} style={{ width: '1100px', backgroundColor: '#FFEEDA', height: '140px', marginBottom: '20px' , marginTop:"10px"}}>

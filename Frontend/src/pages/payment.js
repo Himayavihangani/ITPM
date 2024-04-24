@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import NavBar from '../component/header'
 import Footer from '../component/footer'
 
-// Visa form component
+// Visa Form component
 function VisaForm() {
     return (
         <div style={{paddingLeft:"40px" , paddingTop:"20px"}}>
