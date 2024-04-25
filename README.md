@@ -1,0 +1,3 @@
+ Our online food ordering application is specifically designed to cater to the needs of visually impaired individuals. With a user-friendly interface, it offers features like zoom-in options and color-changing capabilities to enhance accessibility. Users can easily navigate through menus, select their desired dishes, and customize their orders. The zoom-in feature allows users to enlarge text and images for better readability,
+ while the color-changing option enables them to adjust the interface to suit their preferences or visual needs.
+ Our goal is to make the process of ordering food online as seamless and enjoyable as possible for everyone, regardless of visual impairments.
