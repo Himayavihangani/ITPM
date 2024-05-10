@@ -7,6 +7,8 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import NavBar from '../component/header'
 import Footer from '../component/footer'
+import { useState, useEffect } from 'react';
+
 
 const cardData = [
     {
@@ -40,6 +42,22 @@ const cardData = [
 ];
 
 export default function Cart() {
+    const [data, setData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/items');
+        const jsonData = await response.json();
+        setData(jsonData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
     return (
         <div>
                  <NavBar></NavBar>
@@ -51,9 +69,14 @@ export default function Cart() {
             </Button>
         </div>
 {/* cart */}
-            <center>
-                {cardData.map((card) => (
-                    <Card key={card.id} style={{ width: '1100px', backgroundColor: '#FFEEDA', height: '140px', marginBottom: '20px' , marginTop:"10px"}}>
+{isLoading ?
+                                    <h3 style={{ fontFamily: 'lato', fontSize: '31px', fontWeight: 700 }}>loading items...</h3>
+                :
+                
+            
+           <center>
+                {data.map((card) => (
+                    <Card key={card._id} style={{ width: '1100px', backgroundColor: '#FFEEDA', height: '140px', marginBottom: '20px' , marginTop:"10px"}}>
                         <Card.Body>
                             <Row>
                                 <Col><Image src={card.imageUrl} style={{ width: '70px', marginBottom: '20px' }} /></Col>
@@ -67,9 +90,9 @@ export default function Cart() {
                                 <Col>
                                     <Container style={{ backgroundColor: '#FC9735', borderRadius: '20px', marginTop: '20px' }}>
                                         <Row>
-                                            <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' }}>+</Button></Col>
-                                            <Col><h3 style={{ fontFamily: 'lato', fontSize: '20px', fontWeight: 700, paddingTop: '10px' }}>1</h3></Col>
                                             <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' }}>-</Button></Col>
+                                            <Col><h3 style={{ fontFamily: 'lato', fontSize: '20px', fontWeight: 700, paddingTop: '10px' }}>1</h3></Col>
+                                            <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' }}>+</Button></Col>
                                         </Row>
                                     </Container>
                                 </Col>
@@ -95,6 +118,7 @@ export default function Cart() {
                     </Card.Body>
                 </Card>
             </center>
+}
             <Footer></Footer>
         </div>
     );
