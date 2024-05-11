@@ -38,6 +38,8 @@ const cardData = [
 ];
 
 app.use(cors());
+app.use(express.json());
+
 //defining items API endpoint
 // req=request from UI to API
 // res=response from API to UI

@@ -21,6 +21,30 @@ export default function Cart() {
             headers: { 'Content-Type': 'application/json' }
         }).then(() => fetchData());
     }
+    const updateItem = (itemIndex, isAddingItem) => {
+        // delete item if less than 2
+        if (!isAddingItem && data[itemIndex].quantity <= 1) {
+            deleteItem(itemIndex);
+            return;
+        }
+        if (isAddingItem) {
+            // add item
+            data[itemIndex].quantity += 1;
+        } else  {
+            // Remove item
+            data[itemIndex].quantity -= 1;
+        }
+        // Updating quantity
+        setData(data);
+        // Calling API to update quantity
+        fetch('http://localhost:3000/items/' + data[itemIndex]._id, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                quantity: data[itemIndex].quantity
+            }),
+            headers: { 'Content-Type': 'application/json' }
+        }).then(() => fetchData());
+    }
     
 
     const [data, setData] = useState(null);
@@ -63,14 +87,15 @@ export default function Cart() {
                                     <h3 style={{ fontFamily: 'lato', fontSize: '16px', fontWeight: 500 }}>{cartItem.description}</h3>
                                 </Col>
                                 <Col>
-                                    <h3 style={{ fontFamily: 'lato', fontSize: '31px', fontWeight: 700, paddingTop: '20px', color: '#7C7C7C', opacity: '60%' }}>{cartItem.price}</h3>
+                                    <h3 style={{ fontFamily: 'lato', fontSize: '31px', fontWeight: 700, paddingTop: '20px', color: '#7C7C7C', opacity: '60%' }}>RS: {cartItem.price}.00</h3>
                                 </Col>
+                                
                                 <Col>
                                     <Container style={{ backgroundColor: '#FC9735', borderRadius: '20px', marginTop: '20px' }}>
                                         <Row>
-                                            <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' }}>-</Button></Col>
-                                            <Col><h3 style={{ fontFamily: 'lato', fontSize: '20px', fontWeight: 700, paddingTop: '10px' }}>1</h3></Col>
-                                            <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' }}>+</Button></Col>
+                                            <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' } } onClick={() => updateItem(i, false)}>-</Button></Col>
+                                            <Col><h3 style={{ fontFamily: 'lato', fontSize: '20px', fontWeight: 700, paddingTop: '10px' }}>{cartItem.quantity}</h3></Col>
+                                            <Col><Button style={{ backgroundColor: '#FC9735', fontSize: '20px', border: '#FC9735', color: '#000000' }} onClick={() => updateItem(i, true)}>+</Button></Col>
                                         </Row>
                                     </Container>
                                 </Col>
